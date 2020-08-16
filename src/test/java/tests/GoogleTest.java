@@ -19,4 +19,26 @@ class GoogleTest {
         // Проверить, что Selenide появился в результатах поиска
         $("html").shouldHave(text("ru.selenide.org"));
     }
+    @Test
+    void selenideSearchTestYandex() {
+        // Открыть google
+        open("https://yandex.ru");
+
+        // Ввести Selenide в поиск
+        $(byName("text")).setValue("Selenide").pressEnter();
+
+        // Проверить, что Selenide появился в результатах поиска
+        $("html").shouldHave(text("ru.selenide.org"));
+    }
+    @Test
+    void QAGuruSearchTest() {
+        // Открыть google
+        open("https://google.com");
+
+        // Ввести Selenide в поиск
+        $(byName("q")).setValue("QA Guru").pressEnter();
+
+        // Проверить, что QA.GURU появился в результатах поиска
+        $("html").shouldHave(text("QA.GURU"));
+    }
 }
