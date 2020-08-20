@@ -19,6 +19,7 @@ class GoogleTest {
         // Проверить, что Selenide появился в результатах поиска
         $("html").shouldHave(text("ru.selenide.org"));
     }
+
     @Test
     void selenideSearchTestYandex() {
         // Открыть google
@@ -30,8 +31,9 @@ class GoogleTest {
         // Проверить, что Selenide появился в результатах поиска
         $("html").shouldHave(text("ru.selenide.org"));
     }
+
     @Test
-    void QAGuruSearchTest() {
+    void qaGuruSearchTest() {
         // Открыть google
         open("https://google.com");
 
