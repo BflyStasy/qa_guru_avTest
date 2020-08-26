@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class avTests {
+public class AvTests {
     @Test
     void avSearchTest()
     {
@@ -17,16 +17,16 @@ public class avTests {
         open("https://av.ru");
 
         //выбрать регион Москва
-        $(byXpath("//div[@class='b-region-modal__button b-button b-button_green']")).click();
+        $(".b-region-modal__button").click();
 
         //кликнуть на иконку поиска
-        $(byXpath("//button[@class='b-button b-header-search__btn js-quicksearch']")).click();
+        $(".b-header-search__btn").click();
 
         //Вводим в строке поиска текст "молоко"
         $(byName("text")).setValue("молоко").pressEnter();
 
         //Проверяем, что результат поиска перекинул в раздел каталога "Молоко"
-        $(byXpath("//h1[@class='b-catalog-page__title']")).shouldHave(text("Молоко"));
+        $(".b-catalog-page__title").shouldHave(text("Молоко"));
    }
 
     @Test
@@ -36,15 +36,16 @@ public class avTests {
         open("https://av.ru");
 
         //выбрать регион Москва
-        $(byXpath("//div[@class='b-region-modal__button b-button b-button_green']")).click();
+        $(".b-region-modal__button").click();
 
         //в шапке нажать кнопку смены региона
-        $(byXpath("//div[@class='b-header-dropdown b-header-dropdown_top']")).click();
+        $(".b-header-dropdown_top").click();
+
         //выбрать Санкт-Петербург
-        $(byXpath("//span[@class='b-header-dropdown__link b-header-dropdown__link_top js-region-change']")).click();
+        $(".b-header-dropdown__link_top").click();
 
         //Проверить, что выбран Санкт-Петербург
-        $(byXpath("//span[@class='b-header-dropdown__title']")).shouldHave(text("Санкт-Петербург"));
+        $(".b-header-dropdown__title']").shouldHave(text("Санкт-Петербург"));
 
     }
 
@@ -54,10 +55,10 @@ public class avTests {
         open("https://av.ru");
 
         //выбрать регион Москва
-        $(byXpath("//div[@class='b-region-modal__button b-button b-button_green']")).click();
+        $(".b-region-modal__button").click();
 
         //кнопка выбора таймслота
-        $(byXpath("//span[@class='b-header-nav__timeslot-choose']")).click();
+        $(".b-header-nav__timeslot-choose").click();
 
         //Ввод адреса
         $(byName("address")).setValue("Россия, Москва, улица Юных Ленинцев, 3").pressEnter();
@@ -69,17 +70,17 @@ public class avTests {
         $(byName("porch")).setValue("1");
 
         //Перейти на шаг выбора времени доставки
-        $(byXpath("//button[contains(@class,'b-button b-button_green js-save-address')]")).click();
+        $(".b-timeslot-form__action").click();
 
         Thread.sleep(2000);
 
         //Выбор слота доставки
-        $(byXpath("//button[contains(@class,'b-button b-button_slot b-button_reactive')]")).click();
+        $(".b-button_reactive").click();
 
         Thread.sleep(1000);
 
         //Проверить, что отображается правильный таймслот
-        $(byXpath("//span[@class='b-header-nav__timeslot-date']")).shouldHave(text("За 60 минут"));
+        $(".b-header-nav__timeslot-date").shouldHave(text("За 60 минут"));
     }
 
     @Test
@@ -88,16 +89,16 @@ public class avTests {
         open("https://av.ru");
 
         //выбрать регион Москва
-        $(byXpath("//div[@class='b-region-modal__button b-button b-button_green']")).click();
+        $(".b-region-modal__button").click();
 
         //Развернуь каталог
-        $(byXpath("//span[@class='b-header-dropdown__title b-header-dropdown__title_catalog']")).click();
+        $(".b-header-dropdown__title_catalog").click();
 
         //Выбираем раздел каталога Бакалея
         $(byLinkText("Бакалея")).click();
 
         //проверяем, что открылся нужный раздел каталога
-        $(byXpath("//h1[@class='b-catalog-page__title']")).shouldHave(text("Бакалея"));
+        $("h1").shouldHave(text("Бакалея"));
 
         // Макароны, крупы
         $(byLinkText("Макароны, крупы")).click();
@@ -106,7 +107,7 @@ public class avTests {
         $(byLinkText("Макароны")).click();
 
         //Кликаем на иконку корзины у первого товара в категории
-        $(byClassName("b-grid__item")).$(byTitle("В корзину")).click();
+        $(".b-grid__item").$(byTitle("В корзину")).click();
 
         //Ввод адреса
         $(byName("address")).setValue("Россия, Москва, улица Юных Ленинцев, 3").pressEnter();
@@ -118,17 +119,19 @@ public class avTests {
         $(byName("porch")).setValue("1");
 
         //Перейти на шаг выбора времени доставки
-        $(byXpath("//button[contains(@class,'b-button b-button_green js-save-address')]")).click();
-        Thread.sleep(5000);
+        $(".b-timeslot-form__action").click();
 
-        //Выбор слота доставки
-        $(byXpath("//button[contains(@class,'b-button b-button_slot b-button_reactive')]")).click();
         Thread.sleep(2000);
 
+        //Выбор слота доставки
+        $(".b-button_reactive").click();
+
+        Thread.sleep(1000);
+
         //Кликаем на иконку корзины у первого товара в категории
-        $(byClassName("b-grid__item")).$(byTitle("В корзину")).click();
+        $(".b-grid__item").$(byTitle("В корзину")).click();
 
         //Провряем, что в корзине 1 товар.
-        $(byXpath("//div[@class='b-header-nav__cart-count js-new-header-total']")).shouldHave(text("1"));
+        $(".b-link__basket-text_total").shouldHave(text("1"));
     }
 }
